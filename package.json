@@ -1,0 +1,33 @@
+{
+  "name": "battleship-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "webpack --watch",
+    "build": "webpack",
+    "test":"jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pe44a/battleship-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pe44a/battleship-game/issues"
+  },
+  "homepage": "https://github.com/Pe44a/battleship-game#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.5",
+    "css-loader": "^6.8.1",
+    "jest": "^29.5.0",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
