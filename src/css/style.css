@@ -46,8 +46,7 @@
   }
 
 
-
-  #start-button {
+  .button {
     background-color: rgba(51, 51, 51, 0.05);
     border-radius: 8px;
     border: solid;
@@ -84,4 +83,11 @@
 
   .disabled {
     pointer-events: none;
+  }
+
+  /* Disappear */
+
+
+  .disappear {
+    display: none;
   }
