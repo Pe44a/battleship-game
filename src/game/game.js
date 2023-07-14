@@ -1,4 +1,5 @@
 import { Player } from "../scripts/player";
+import { renderShips } from "../DOMinteraction/render";
 
 
 // Place ships randomly
@@ -7,6 +8,7 @@ import { Player } from "../scripts/player";
 const gameLoop = () => {
   const player1 = Player();
   const player2 = Player();
+
   let player1Won = false;
   let player2Won = false;
   let player1Turn = true; //Determines which player hits another player
@@ -15,21 +17,27 @@ const gameLoop = () => {
   const player2GridItems = document.querySelectorAll('.grid-item-player2');
   const startButton = document.querySelector('#start-button');
   const restartButton = document.querySelector('#restart-button');
-  const placesShips = document.querySelector('#player1-places-ships'); //PLaces ships button
+  const placesShipsButton = document.querySelector('#player1-places-ships');
 
 
   // Starts game, blocks certain activities
   startButton.addEventListener('click', () => {
-    placesShips.disabled = true;
+    placesShipsButton.disabled = true;
     startButton.classList.add('disappear');
   });
 
 
   // Places both players ships
-  placesShips.addEventListener('click', () => {
+  placesShipsButton.addEventListener('click', () => {
     player1.gameboard.placeShip(1,1,3,'x');
 
+    renderShips('player1', player1.gameboard.getShips());
+
     player2.gameboard.placeShip(1,1,3,'y');
+
+
+
+    console.log(player1.gameboard.getShips());
   });
 
 
@@ -40,7 +48,7 @@ const gameLoop = () => {
 
       if(player1Turn === true) {
         const coord = event.target.dataset.coord;
-        const parsedCoord = JSON.parse(coord);
+        const parsedCoord = JSON.parse(coord);//Converts string into array
 
         player2.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
         player1Won = player2.gameboard.allShipsSunk();
@@ -62,7 +70,7 @@ const gameLoop = () => {
   
       if(player1Turn === false) {
         const coord = event.target.dataset.coord;
-        const parsedCoord = JSON.parse(coord);
+        const parsedCoord = JSON.parse(coord);//Converts string into array
 
         player1.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
         player2Won = player1.gameboard.allShipsSunk();
@@ -76,11 +84,13 @@ const gameLoop = () => {
    });
   });
 
+
   const checkWinner = () => {
     if (player1Won || player2Won) {
       const board = document.querySelector('.board');
       board.classList.add('disabled');
       restartButton.classList.remove('disappear');
+      startButton.classList.add('disappear');
     }
   
     return player1Won ? 'Player1 won' : player2Won ? 'Player2 won' : undefined;

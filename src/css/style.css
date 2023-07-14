@@ -27,12 +27,19 @@
     border: 1px solid black;
   }
   
-  .board div.hit {
-    background-color: red;
+  .ship::after {
+    content: "x";
+    color: black;
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  .hit {
+    background-color: rgb(24, 187, 24);
   }
   
-  .board div.miss {
-    background-color: white;
+  .miss {
+    background-color: red;
   }
 
 
