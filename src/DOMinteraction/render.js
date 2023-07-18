@@ -43,7 +43,7 @@ const renderShips = (player, shipsInfo) => {
                 if(shipsInfo[i][0][j][0] === coordArray[0] && //If grid items value matches ships coord value
                    shipsInfo[i][0][j][1] === coordArray[1]) { 
     
-                    playerGridItems[k].classList.add('ship'); // it marks that there is a ship  
+                    playerGridItems[k].classList.add('ship'); // Marks that there is a ship  
                 }
                 
             }

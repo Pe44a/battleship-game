@@ -31,15 +31,17 @@
     content: "x";
     color: black;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 23px;
   }
 
   .hit {
     background-color: rgb(24, 187, 24);
+    pointer-events: none;
   }
   
   .miss {
     background-color: red;
+    pointer-events: none;
   }
 
 

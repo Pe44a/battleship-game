@@ -72,10 +72,12 @@ const Gameboard = () => {
                 shipFunc.isSunk(); //Checks if ship is sunk
 
                 if(shipObject.sunk  === true) sunkShipAmount += 1;
+                return true;
               }
             }
 
                 missedShots.push([x,y]); //Updates missed shot list
+                return false;
           }
     };
 

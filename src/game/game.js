@@ -13,6 +13,8 @@ const gameLoop = () => {
   let player2Won = false;
   let player1Turn = true; //Determines which player hits another player
 
+
+  // DOM elements
   const player1GridItems = document.querySelectorAll('.grid-item-player1');
   const player2GridItems = document.querySelectorAll('.grid-item-player2');
   const startButton = document.querySelector('#start-button');
@@ -34,10 +36,6 @@ const gameLoop = () => {
     renderShips('player1', player1.gameboard.getShips());
 
     player2.gameboard.placeShip(1,1,3,'y');
-
-
-
-    console.log(player1.gameboard.getShips());
   });
 
 
@@ -47,13 +45,14 @@ const gameLoop = () => {
       event.defaultPrevented;
 
       if(player1Turn === true) {
+        const target = event.target;
         const coord = event.target.dataset.coord;
         const parsedCoord = JSON.parse(coord);//Converts string into array
 
-        player2.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
-        player1Won = player2.gameboard.allShipsSunk();
-        console.log(player2.gameboard.getShips());
-        console.log(player2.gameboard.allShipsSunk());
+        const result = player1.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
+        result === true ? target.classList.add('hit'): target.classList.add('miss');
+
+        player2Won = player1.gameboard.allShipsSunk();
         checkWinner();
         // render
         player1Turn = false;
@@ -69,13 +68,14 @@ const gameLoop = () => {
       event.defaultPrevented;
   
       if(player1Turn === false) {
+        const target = event.target;
         const coord = event.target.dataset.coord;
         const parsedCoord = JSON.parse(coord);//Converts string into array
 
-        player1.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
-        player2Won = player1.gameboard.allShipsSunk();
-        console.log(player1.gameboard.getShips());
-        console.log(player1.gameboard.allShipsSunk());
+        const result = player2.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
+        result === true ? target.classList.add('hit'): target.classList.add('miss');
+
+        player1Won = player2.gameboard.allShipsSunk();
         checkWinner();
         // render
         player1Turn = true;
