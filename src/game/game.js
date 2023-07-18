@@ -4,14 +4,13 @@ import { renderShips } from "../DOMinteraction/render";
 
 // Place ships randomly
 
-
 const gameLoop = () => {
   const player1 = Player();
   const player2 = Player();
 
   let player1Won = false;
   let player2Won = false;
-  let player1Turn = true; //Determines which player hits another player
+  let player1Turn = false; //Determines which player hits another player
 
 
   // DOM elements
@@ -26,6 +25,10 @@ const gameLoop = () => {
   startButton.addEventListener('click', () => {
     placesShipsButton.disabled = true;
     startButton.classList.add('disappear');
+  });
+
+  restartButton.addEventListener('click', () => {
+    location.reload();
   });
 
 
@@ -55,7 +58,10 @@ const gameLoop = () => {
         player2Won = player1.gameboard.allShipsSunk();
         checkWinner();
         // render
-        player1Turn = false;
+
+        // If you hit target successfully
+        // You hit enemy one more time
+        if(result === false) player1Turn = false; 
       }
 
    });
@@ -78,7 +84,10 @@ const gameLoop = () => {
         player1Won = player2.gameboard.allShipsSunk();
         checkWinner();
         // render
-        player1Turn = true;
+
+        // If you hit target successfully
+        // You hit enemy one more time
+        if(result === false) player1Turn = true;
       }
 
    });
