@@ -44,10 +44,8 @@ const renderShips = (player, shipsInfo) => {
                    shipsInfo[i][0][j][1] === coordArray[1]) { 
     
                     playerGridItems[k].classList.add('ship'); // Marks that there is a ship  
-                }
-                
+                }  
             }
-            
         }
         
         
