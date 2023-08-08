@@ -141,6 +141,7 @@ const gameLoop = () => {
 
   // Places both players ships
   placesShipsButton.addEventListener('click', () => {
+    
     document.querySelector('#player1-board').innerHTML = '';
     document.querySelector('#player2-board').innerHTML = '';
 

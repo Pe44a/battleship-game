@@ -81,9 +81,8 @@ const Gameboard = () => {
           }
     };
 
-    const removeLastShip = () => {ships.pop()};
-    const removeLastShip = () => {ships.pop()};
 
+    const removeLastShip = () => {ships.pop()};
     const getShips = () => {return ships};
     const getMissedShots = () => {return missedShots};
     const allShipsSunk = () => {return (sunkShipAmount >= shipAmount) ? true : false};
