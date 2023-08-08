@@ -174,6 +174,7 @@ const gameLoop = () => {
         // render
 
         // If you hit a target successfully
+        // If you hit a target successfully
         // You hit enemy one more time
         if(result === false) player1Turn = false; 
       }
@@ -199,6 +200,7 @@ const gameLoop = () => {
         checkWinner();
         // render
 
+        // If you hit a target successfully
         // If you hit a target successfully
         // You hit enemy one more time
         if(result === false) player1Turn = true;

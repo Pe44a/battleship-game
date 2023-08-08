@@ -18310,7 +18310,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 const placeShipRandomly = (length, player) => {
 let shipPlaced = false;
 
