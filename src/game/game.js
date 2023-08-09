@@ -1,6 +1,6 @@
 import { Player } from "../scripts/player";
-import {generateGridItems ,renderShips } from "../DOMinteraction/render";
-import { Bot } from "../scripts/bot";
+import {renderShips } from "../DOMinteraction/render";
+// import { Bot } from "../scripts/bot";
 
 
 const placeShipRandomly = (length, player) => {
@@ -82,6 +82,7 @@ if(player.gameboard.placeShip(x,y,length, generateXorY) !== false) {
       if(cantPlaceHere[j][0] === lastShip[i][0] && cantPlaceHere[j][1] === lastShip[i][1]) {
 
         player.gameboard.removeLastShip();
+        player.gameboard.removeShipAmount();
         continue loop;
       }
     }
@@ -103,6 +104,8 @@ const randomlyPlaceAllShips = (player) => {
   placeShipRandomly(1,player);
   placeShipRandomly(1,player);
 }
+
+
 
 
 
@@ -141,11 +144,8 @@ const gameLoop = () => {
 
   // Places both players ships
   placesShipsButton.addEventListener('click', () => {
-    
-    document.querySelector('#player1-board').innerHTML = '';
-    document.querySelector('#player2-board').innerHTML = '';
-
-    generateGridItems();
+    //Removes all ships
+    document.querySelectorAll('.grid-item').forEach((item) => { item.classList.remove('ship')});
 
     player1.gameboard.deleteAllShips();
     player2.gameboard.deleteAllShips();
@@ -175,7 +175,6 @@ const gameLoop = () => {
         // render
 
         // If you hit a target successfully
-        // If you hit a target successfully
         // You hit enemy one more time
         if(result === false) player1Turn = false; 
       }
@@ -201,7 +200,6 @@ const gameLoop = () => {
         checkWinner();
         // render
 
-        // If you hit a target successfully
         // If you hit a target successfully
         // You hit enemy one more time
         if(result === false) player1Turn = true;

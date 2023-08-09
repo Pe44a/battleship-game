@@ -75,21 +75,22 @@ const Gameboard = () => {
                 return true;
               }
             }
-
-                missedShots.push([x,y]); //Updates missed shot list
-                return false;
           }
+
+        missedShots.push([x,y]); //Updates missed shot list
+        return false;
     };
 
 
     const removeLastShip = () => {ships.pop()};
+    const removeShipAmount = () => {shipAmount -= 1}
     const getShips = () => {return ships};
     const getMissedShots = () => {return missedShots};
     const allShipsSunk = () => {return (sunkShipAmount >= shipAmount) ? true : false};
     const deleteAllShips = () => {ships.length = 0}; 
 
 
-    return {placeShip, receiveAttack, removeLastShip, getShips, getMissedShots, allShipsSunk, deleteAllShips};
+    return {placeShip, receiveAttack, removeLastShip, removeShipAmount, getShips, getMissedShots, allShipsSunk, deleteAllShips};
 };
 
 export { Gameboard };
