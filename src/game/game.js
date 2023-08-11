@@ -226,10 +226,10 @@ const gameLoop = () => {
 
     const displayResult = document.querySelector('.player-result');
 
-    if(player1Won ==true){
+    if(player1Won === true){
       displayResult.textContent = 'You won';
     } 
-    if (player2Won) {
+    if (player2Won === true) {
       displayResult.textContent = 'You lost';
     }
   };
