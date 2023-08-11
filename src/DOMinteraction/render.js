@@ -3,7 +3,8 @@
 const generateGridItems = () => {
     const player1Board = document.querySelector('#player1-board');
     const player2Board = document.querySelector('#player2-board');
-
+    player1Board.classList.add('disabled');
+    player2Board.classList.add('disabled');
 
     for (let y = 1; y <= 10; y++) {
         for (let x = 1; x <= 10; x++) {
