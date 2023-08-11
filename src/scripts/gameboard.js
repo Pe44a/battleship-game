@@ -86,11 +86,19 @@ const Gameboard = () => {
     const removeShipAmount = () => {shipAmount -= 1}
     const getShips = () => {return ships};
     const getMissedShots = () => {return missedShots};
-    const allShipsSunk = () => {return (sunkShipAmount >= shipAmount) ? true : false};
-    const deleteAllShips = () => {ships.length = 0}; 
+    const allShipsSunk = () => {
+        console.log([sunkShipAmount,shipAmount]);
+
+        return (sunkShipAmount >= shipAmount) ? true : false};
+    const resetValues = () => {
+        ships.length = 0;
+        missedShots.length = 0;
+        shipAmount = 0;
+        sunkShipAmount = 0;
+    }; 
 
 
-    return {placeShip, receiveAttack, removeLastShip, removeShipAmount, getShips, getMissedShots, allShipsSunk, deleteAllShips};
+    return {placeShip, receiveAttack, removeLastShip, removeShipAmount, getShips, getMissedShots, allShipsSunk, resetValues};
 };
 
 export { Gameboard };

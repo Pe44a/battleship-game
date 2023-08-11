@@ -116,7 +116,6 @@ const gameLoop = () => {
 
   let player1Won = false;
   let player2Won = false;
-  let player1Turn = false; //Determines which player hits another player
 
   randomlyPlaceAllShips(player1);
   randomlyPlaceAllShips(player2);
@@ -135,6 +134,9 @@ const gameLoop = () => {
   startButton.addEventListener('click', () => {
     placesShipsButton.disabled = true;
     startButton.classList.add('disappear');
+
+    document.querySelector('#player1-board').classList.remove('disabled');
+    document.querySelector('#player2-board').classList.remove('disabled');
   });
 
   restartButton.addEventListener('click', () => {
@@ -147,8 +149,8 @@ const gameLoop = () => {
     //Removes all ships
     document.querySelectorAll('.grid-item').forEach((item) => { item.classList.remove('ship')});
 
-    player1.gameboard.deleteAllShips();
-    player2.gameboard.deleteAllShips();
+    player1.gameboard.resetValues();
+    player2.gameboard.resetValues();
 
     randomlyPlaceAllShips(player1)
     randomlyPlaceAllShips(player2);
@@ -157,53 +159,58 @@ const gameLoop = () => {
   });
 
 
-  // Registers hits only if its players turn
-  player1GridItems.forEach(gridItem => {
-    gridItem.addEventListener('click', (event) => {
-      event.defaultPrevented;
+  const botAttack = () => {
+  let botAttack = true;
 
-      if(player1Turn === true) {
-        const target = event.target;
-        const coord = event.target.dataset.coord;
-        const parsedCoord = JSON.parse(coord);//Converts string into array
+    loop: while (botAttack === true) {
+      const x = Math.floor(Math.random() * 10 + 1);
+      const y = Math.floor(Math.random() * 10 + 1);
+      
+      const gridItems = document.querySelectorAll('.grid-item-player1');
+      let gridItem;
 
-        const result = player1.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
-        result === true ? target.classList.add('hit'): target.classList.add('miss');
+      //We get the html element which values are equal to x and y
+      gridItems.forEach(item => {
+        const coords = JSON.parse(item.dataset.coord);
+        if(coords[0] === x && coords[1] === y) gridItem = item;
+      });
 
-        player2Won = player1.gameboard.allShipsSunk();
-        checkWinner();
-        // render
 
-        // If you hit a target successfully
-        // You hit enemy one more time
-        if(result === false) player1Turn = false; 
+      // Can't attack where you already attacked
+      if(gridItem.classList.contains('miss') || gridItem.classList.contains('hit')) {
+        continue loop;
       }
 
-   });
-  });
+      const result = player1.gameboard.receiveAttack(x, y);
+      result === true ? gridItem.classList.add('hit'): gridItem.classList.add('miss');
+
+      player2Won = player1.gameboard.allShipsSunk();
+      checkWinner();
+
+      if(player2Won === true) { break loop};//Stop loop if there is a winner
+      if(result === true) { continue loop};
+      if(result === false) { botAttack = false};
+    }
+  };
 
 
-  // Registers hits only if its players turn
+  // Registers hits
   player2GridItems.forEach(gridItem => {
     gridItem.addEventListener('click', (event) => {
       event.defaultPrevented;
-  
-      if(player1Turn === false) {
-        const target = event.target;
-        const coord = event.target.dataset.coord;
-        const parsedCoord = JSON.parse(coord);//Converts string into array
 
-        const result = player2.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
-        result === true ? target.classList.add('hit'): target.classList.add('miss');
+      const target = event.target;
+      const coord = event.target.dataset.coord;
+      const parsedCoord = JSON.parse(coord);//Converts string into array
 
-        player1Won = player2.gameboard.allShipsSunk();
-        checkWinner();
-        // render
+      const result = player2.gameboard.receiveAttack(parsedCoord[0], parsedCoord[1]);
+      result === true ? target.classList.add('hit'): target.classList.add('miss');
 
-        // If you hit a target successfully
-        // You hit enemy one more time
-        if(result === false) player1Turn = true;
-      }
+      player1Won = player2.gameboard.allShipsSunk();
+      checkWinner();
+
+      // One more hit if you hit
+      if(result === false) {botAttack()};
 
    });
   });
@@ -211,14 +218,20 @@ const gameLoop = () => {
 
   const checkWinner = () => {
     if (player1Won || player2Won) {
-      const board = document.querySelector('.board');
-      board.classList.add('disabled');
+      const boards = document.querySelectorAll('.board');
+      boards.forEach((board) => {board.classList.add('disabled')});
       restartButton.classList.remove('disappear');
       startButton.classList.add('disappear');
     }
 
-  
-    return player1Won ? 'Player1 won' : player2Won ? 'Player2 won' : undefined;
+    const displayResult = document.querySelector('.player-result');
+
+    if(player1Won ==true){
+      displayResult.textContent = 'You won';
+    } 
+    // if (player2Won) {
+      displayResult.textContent = 'You lost';
+    // }
   };
   
 };
