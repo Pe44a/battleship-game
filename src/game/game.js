@@ -229,9 +229,9 @@ const gameLoop = () => {
     if(player1Won ==true){
       displayResult.textContent = 'You won';
     } 
-    // if (player2Won) {
+    if (player2Won) {
       displayResult.textContent = 'You lost';
-    // }
+    }
   };
   
 };
