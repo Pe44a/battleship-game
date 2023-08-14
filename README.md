@@ -1,7 +1,7 @@
 # battleship-game
 
 
-Check out here: 
+Check out here: https://pe44a.github.io/battleship-game/
 
 This is a simple implementation of the classic Battleship game using HTML, CSS, and JavaScript. The game is designed to be played by one player and bot, and it includes features like placing ships randomly, attacking opponent's ships, and determining the winner.
 
