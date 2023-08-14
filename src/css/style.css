@@ -44,12 +44,12 @@
   }
 
   .hit {
-    background-color: rgb(24, 187, 24);
+    background-color: rgb(144, 238, 144);
     pointer-events: none;
   }
   
   .miss {
-    background-color: red;
+    background-color: rgb(240, 116, 116);
     pointer-events: none;
   }
 
