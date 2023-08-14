@@ -3,7 +3,6 @@ import { renderShips } from "../DOMinteraction/render";
 import { placeAllShips } from "./placeShip";
 
 
-
 const gameLoop = () => {
   const player1 = Player();
   const player2 = Player();
@@ -129,8 +128,6 @@ const gameLoop = () => {
   };
   
 };
-
-
 
 
 export {gameLoop};
